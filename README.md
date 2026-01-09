@@ -1,4 +1,4 @@
-# Отчёт по работе с SOPS и Age 
+<img width="974" height="223" alt="image" src="https://github.com/user-attachments/assets/13aa9477-0c18-4f43-8969-b1be791cbda0" /># Отчёт по работе с SOPS и Age 
 
 ## 1. Цель работы
 
@@ -20,20 +20,22 @@
 age --version
 sops --version
 ```
+<img width="974" height="643" alt="image" src="https://github.com/user-attachments/assets/82837e3b-5fd1-4561-b057-c4646beb3c4a" />
 
-## 4. Генерация ключей Age
+<img width="974" height="223" alt="image" src="https://github.com/user-attachments/assets/40d28f89-d3d8-48c4-afda-2c7e82ebab86" />
+
+## 4. Генерация ключей Age и настройка конфигурации SOPS
 
 Для шифрования данных был сгенерирован ключ Age с помощью команды:
 
 ```
 age-keygen -o keys.txt
 ```
+<img width="974" height="281" alt="image" src="https://github.com/user-attachments/assets/5fdbcf5c-019e-4c49-a436-ed9d53bcc702" />
 
 
 В результате был создан файл `keys.txt`, содержащий приватный ключ, а также выведен публичный ключ, который используется для шифрования данных.
-
-## 5. Настройка конфигурации SOPS
-
+**SOPS**
 В корне проекта был создан файл конфигурации `.sops.yaml`, содержащий правила шифрования:
 
 ```
@@ -41,8 +43,6 @@ creation_rules:
   - path_regex: 'secrets\\.*\.yaml$'
     age: 'age1...'
 ```
-
-
 
 Правило указывает, что все YAML-файлы в каталоге `secrets` должны автоматически шифроваться с использованием указанного публичного ключа Age. Регулярное выражение адаптировано под файловую систему Windows.
 
@@ -53,6 +53,7 @@ creation_rules:
 ```
 sops --encrypt secrets\database.yaml > secrets\database.enc.yaml
 ```
+<img width="974" height="521" alt="image" src="https://github.com/user-attachments/assets/8065441f-0968-42c2-9520-db7f71580102" />
 
 
 В результате был получен зашифрованный файл `database.enc.yaml`, содержащий зашифрованные значения и служебный блок `sops`.
@@ -71,6 +72,7 @@ $env:SOPS_AGE_KEY_FILE = "$PWD\keys.txt"
 sops --decrypt secrets\database.enc.yaml
 ```
 
+<img width="974" height="249" alt="image" src="https://github.com/user-attachments/assets/5eac85ea-51cb-4a33-adfd-f05d7f5d909c" />
 
 
 Данные были успешно восстановлены в исходном виде.
@@ -83,13 +85,20 @@ sops --decrypt secrets\database.enc.yaml
 sops secrets/database/postgres.enc.yaml
 ```
 
+<img width="974" height="186" alt="image" src="https://github.com/user-attachments/assets/ce468a92-6b60-4b24-886a-5a5e8d54c3aa" />
 
 
 позволила открыть файл в расшифрованном виде, внести изменения и автоматически сохранить его в зашифрованном состоянии.
 
+## 9. Расшифровка и сохранение 
+
+<img width="974" height="415" alt="image" src="https://github.com/user-attachments/assets/eae80009-4d40-494b-8401-a5fdfc40be15" />
+
+## 10. Редактирование зашифрованного файла
+
+<img width="974" height="176" alt="image" src="https://github.com/user-attachments/assets/71c45a48-8c28-46b3-b5e1-fd213cbf615e" />
 
 
-
-## 9. Вывод
+## 11. Вывод
 
 В ходе выполнения работы был успешно освоен инструмент SOPS совместно с Age для безопасного хранения конфиденциальных данных. Было показано, что использование SOPS на linux возможно без WSL при условии корректной ручной настройки. Инструмент обеспечивает надёжное шифрование, удобное редактирование и безопасную работу с секретами.
