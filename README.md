@@ -1,4 +1,4 @@
-<img width="974" height="223" alt="image" src="https://github.com/user-attachments/assets/13aa9477-0c18-4f43-8969-b1be791cbda0" /># Отчёт по работе с SOPS и Age 
+# Отчёт по работе с SOPS и Age 
 
 ## 1. Цель работы
 
